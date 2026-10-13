@@ -63,13 +63,17 @@ export default function CategoryManagerScreen({ navigation }) {
 
   // Tính số lượng khóa học của từng danh mục
   const courseCountMap = useMemo(() => {
+    const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
     const map = {};
-    courses.forEach((c) => {
-      const catId = String(c.categoryId);
-      map[catId] = (map[catId] || 0) + 1;
+    categories.forEach((cat) => {
+      const catId = String(cat.id);
+      const count = courses.filter(
+        (c) => String(c.categoryId) === catId || normalizeId(c.categoryId) === normalizeId(catId)
+      ).length;
+      map[catId] = count;
     });
     return map;
-  }, [courses]);
+  }, [courses, categories]);
 
   // Mở modal thêm mới
   const handleOpenAddModal = () => {
@@ -123,8 +127,11 @@ export default function CategoryManagerScreen({ navigation }) {
   // Tuyệt đối không cho phép xóa danh mục nếu đang có khóa học thuộc danh mục đó!
   // ============================================================================
   const handleDeleteCategory = (cat) => {
+    const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
     const associatedCourses = courses.filter(
-      (c) => String(c.categoryId) === String(cat.id)
+      (c) =>
+        String(c.categoryId) === String(cat.id) ||
+        normalizeId(c.categoryId) === normalizeId(cat.id)
     );
 
     if (associatedCourses.length > 0) {

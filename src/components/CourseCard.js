@@ -3,8 +3,9 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function CourseCard({ course, categoryName, onPress }) {
   const formatPrice = (val) => {
-    if (typeof val !== 'number') return '0 đ';
-    return val.toLocaleString('vi-VN') + ' đ';
+    const num = Number(val);
+    if (isNaN(num)) return '0 đ';
+    return num.toLocaleString('vi-VN') + ' đ';
   };
 
   return (

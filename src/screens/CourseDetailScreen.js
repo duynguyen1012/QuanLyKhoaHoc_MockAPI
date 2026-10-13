@@ -31,8 +31,11 @@ export default function CourseDetailScreen({ route, navigation }) {
 
       if (courseData) {
         setCourse(courseData);
+        const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
         const cat = (categoriesData || []).find(
-          (c) => String(c.id) === String(courseData.categoryId)
+          (c) =>
+            String(c.id) === String(courseData.categoryId) ||
+            normalizeId(c.id) === normalizeId(courseData.categoryId)
         );
         setCategoryName(cat ? cat.name : 'Chung');
       }
@@ -79,8 +82,9 @@ export default function CourseDetailScreen({ route, navigation }) {
   };
 
   const formatPrice = (val) => {
-    if (typeof val !== 'number') return '0 đ';
-    return val.toLocaleString('vi-VN') + ' đ';
+    const num = Number(val);
+    if (isNaN(num)) return '0 đ';
+    return num.toLocaleString('vi-VN') + ' đ';
   };
 
   if (loading || deleting) {

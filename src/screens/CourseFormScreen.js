@@ -49,8 +49,16 @@ export default function CourseFormScreen({ route, navigation }) {
       try {
         const data = await getCategories();
         setCategories(data || []);
-        if (!categoryId && data && data.length > 0) {
-          setCategoryId(String(data[0].id));
+        const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
+        if (data && data.length > 0) {
+          const matched = data.find(
+            (c) => String(c.id) === String(categoryId) || normalizeId(c.id) === normalizeId(categoryId)
+          );
+          if (matched) {
+            setCategoryId(String(matched.id));
+          } else if (!categoryId) {
+            setCategoryId(String(data[0].id));
+          }
         }
       } catch (err) {
         Alert.alert('Lỗi', 'Không thể tải danh sách danh mục.');
@@ -104,7 +112,15 @@ export default function CourseFormScreen({ route, navigation }) {
     }
 
     // 4. Validate categoryId phải tồn tại
-    if (!categoryId || !categories.some((c) => String(c.id) === String(categoryId))) {
+    const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
+    if (
+      !categoryId ||
+      !categories.some(
+        (c) =>
+          String(c.id) === String(categoryId) ||
+          normalizeId(c.id) === normalizeId(categoryId)
+      )
+    ) {
       Alert.alert('Lỗi nhập liệu', 'Vui lòng chọn một danh mục hợp lệ.');
       return;
     }

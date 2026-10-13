@@ -57,9 +57,9 @@ Dự án được xây dựng bám sát 100% các tiêu chí yêu cầu trong đ
   - `createdAt` (String): Ngày tạo khóa học (YYYY-MM-DD).
 
 > ⚙️ **Cấu hình Base URL:**
-> Mở file `src/services/api.js` và cập nhật biến `BASE_URL`:
+> Đã kết nối với MockAPI.io:
 > ```javascript
-> export const BASE_URL = "https://YOUR_PROJECT_ID.mockapi.io/api/v1";
+> export const BASE_URL = "https://6ace0684f338359cf1c2e828.mockapi.io/api/v1";
 > ```
 
 ---

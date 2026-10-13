@@ -57,22 +57,30 @@ export default function CourseListScreen({ navigation }) {
   const categoryMap = useMemo(() => {
     const map = {};
     categories.forEach((cat) => {
-      map[String(cat.id)] = cat.name;
+      const idStr = String(cat.id);
+      map[idStr] = cat.name;
+      map[`categoryId ${idStr}`] = cat.name;
+      map[`categoryId_${idStr}`] = cat.name;
     });
     return map;
   }, [categories]);
 
   // Bộ lọc theo tên/giảng viên và theo danh mục
   const filteredCourses = useMemo(() => {
+    const normalizeId = (id) => String(id || '').replace(/^categoryId[\s_]*/i, '').trim();
     return courses.filter((course) => {
       const matchesSearch =
         course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (course.instructor &&
           course.instructor.toLowerCase().includes(searchQuery.toLowerCase()));
 
+      const courseCatId = normalizeId(course.categoryId);
+      const filterCatId = normalizeId(selectedCategoryId);
+
       const matchesCategory =
         selectedCategoryId === 'ALL' ||
-        String(course.categoryId) === String(selectedCategoryId);
+        String(course.categoryId) === String(selectedCategoryId) ||
+        courseCatId === filterCatId;
 
       return matchesSearch && matchesCategory;
     });

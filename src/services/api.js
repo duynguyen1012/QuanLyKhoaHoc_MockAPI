@@ -8,7 +8,7 @@
 // Thay thế YOUR_PROJECT_ID bằng ID dự án MockAPI thực tế của bạn
 // Ví dụ: "https://6789abcd.mockapi.io/api/v1"
 // ============================================================================
-export const BASE_URL = "https://6789abcd.mockapi.io/api/v1";
+export const BASE_URL = "https://6ace0684f338359cf1c2e828.mockapi.io/api/v1";
 
 // Dữ liệu mẫu ban đầu theo chuẩn yêu cầu đề bài (tối thiểu 3 danh mục và 10 khóa học)
 const INITIAL_CATEGORIES = [

@@ -9,7 +9,7 @@
 > Ứng dụng di động **Quản lý khóa học trực tuyến** xây dựng bằng **React Native (Expo)**, tích hợp kết nối **REST API (MockAPI.io)** với đầy đủ các thao tác **CRUD** cho 2 resource: `categories` (Danh mục) và `courses` (Khóa học), phát trực tiếp video trailer MP4 bằng `expo-av`, bộ lọc tìm kiếm theo danh mục và xử lý ràng buộc toàn vẹn dữ liệu nghiêm ngặt.
 
 ---
-
+link video demo: https://drive.google.com/file/d/1F_fKpZ7Wk7bsPxjCKDmEUyQkbIw2AqZG/view?usp=sharing
 ## 📌 Mục lục
 - [Giới thiệu dự án & Mục tiêu](#-giới-thiệu-dự-án--mục-tiêu)
 - [Cấu trúc Database (REST API MockAPI.io)](#-cấu-trúc-database-rest-api-mockapiio)

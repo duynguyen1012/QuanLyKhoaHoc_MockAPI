@@ -1,9 +1,9 @@
 # 📱 Ứng Dụng Quản Lý Khóa Học (Course Management - MockAPI)
 
 [![Platform](https://img.shields.io/badge/Platform-React%20Native%20%7C%20Expo-blue.svg)](https://reactnative.dev/)
-[![Expo](https://img.shields.io/badge/Expo-SDK%2052-black.svg)](https://expo.dev/)
+[![Expo](https://img.shields.io/badge/Expo-SDK%2057-black.svg)](https://expo.dev/)
 [![Navigation](https://img.shields.io/badge/React%20Navigation-Native%20Stack-6b21a8.svg)](https://reactnavigation.org/)
-[![Video](https://img.shields.io/badge/Media-expo--av%20(MP4)-orange.svg)](https://docs.expo.dev/versions/latest/sdk/av/)
+[![Video](https://img.shields.io/badge/Media-expo--video%20%7C%20expo--av-orange.svg)](https://docs.expo.dev/versions/latest/sdk/video/)
 [![Backend](https://img.shields.io/badge/Backend-MockAPI.io%20(REST)-0284c7.svg)](https://mockapi.io/)
 
 > Ứng dụng di động **Quản lý khóa học trực tuyến** xây dựng bằng **React Native (Expo)**, tích hợp kết nối **REST API (MockAPI.io)** với đầy đủ các thao tác **CRUD** cho 2 resource: `categories` (Danh mục) và `courses` (Khóa học), phát trực tiếp video trailer MP4 bằng `expo-av`, bộ lọc tìm kiếm theo danh mục và xử lý ràng buộc toàn vẹn dữ liệu nghiêm ngặt.
@@ -158,6 +158,8 @@ QuanLyKhoaHoc_MockAPI/
 ├── App.js                            # Root component với SafeAreaProvider
 ├── app.json                          # Cấu hình Expo application
 ├── package.json                      # Danh sách dependencies và scripts
+├── CHAY_UNG_DUNG.bat                 # Phím tắt khởi động server Expo (quét mã QR)
+├── CHAY_TREN_WEB.bat                 # Phím tắt mở trực tiếp trên trình duyệt máy tính
 └── README.md                         # Tài liệu hướng dẫn dự án
 ```
 

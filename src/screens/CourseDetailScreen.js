@@ -10,9 +10,46 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
+import { useVideoPlayer, VideoView } from 'expo-video';
 import { getCourseById, getCategories, deleteCourse } from '../services/api';
 import LoadingIndicator from '../components/LoadingIndicator';
+
+function ActiveVideo({ url, style }) {
+  const player = useVideoPlayer(url, (p) => {
+    p.loop = true;
+  });
+
+  return (
+    <VideoView
+      style={style}
+      player={player}
+      nativeControls
+      contentFit="contain"
+    />
+  );
+}
+
+function TrailerPlayer({ url, thumbnail, style, fallbackStyle }) {
+  const isHttpUrl =
+    typeof url === 'string' &&
+    (url.startsWith('http://') || url.startsWith('https://'));
+
+  if (!isHttpUrl) {
+    return (
+      <Image
+        source={{
+          uri:
+            thumbnail ||
+            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+        }}
+        style={fallbackStyle || style}
+        resizeMode="cover"
+      />
+    );
+  }
+
+  return <ActiveVideo url={url} style={style} />;
+}
 
 export default function CourseDetailScreen({ route, navigation }) {
   const { courseId } = route.params || {};
@@ -113,27 +150,14 @@ export default function CourseDetailScreen({ route, navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
       <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
-        {/* Khu vực phát Video Trailer MP4 qua expo-av */}
+        {/* Khu vực phát Video Trailer MP4 qua expo-video */}
         <View style={styles.mediaContainer}>
-          {course.trailerUrl ? (
-            <Video
-              source={{ uri: course.trailerUrl }}
-              style={styles.video}
-              useNativeControls
-              resizeMode={ResizeMode.CONTAIN}
-              isLooping
-            />
-          ) : (
-            <Image
-              source={{
-                uri:
-                  course.thumbnail ||
-                  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
-              }}
-              style={styles.fallbackImage}
-              resizeMode="cover"
-            />
-          )}
+          <TrailerPlayer
+            url={course.trailerUrl}
+            thumbnail={course.thumbnail}
+            style={styles.video}
+            fallbackStyle={styles.fallbackImage}
+          />
           <View style={styles.videoBadge}>
             <Text style={styles.videoBadgeText}>▶ Video Trailer</Text>
           </View>
